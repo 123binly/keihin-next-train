@@ -1,4 +1,4 @@
-const CACHE_NAME = "keihin-next-v1";
+const CACHE_NAME = "keihin-next-v2";
 const FILES = ["./", "index.html", "style.css", "data.js", "app.js", "manifest.json"];
 
 self.addEventListener("install", event => {

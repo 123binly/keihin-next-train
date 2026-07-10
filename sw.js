@@ -1,4 +1,4 @@
-const CACHE_NAME = "keihin-next-v2";
+const CACHE_NAME = "keihin-next-v3";
 
 const FILES = [
   "./",
@@ -9,7 +9,7 @@ const FILES = [
   "./manifest.json"
 ];
 
-// 安裝新版本，預先保存必要檔案
+// 安裝新 Service Worker
 self.addEventListener("install", event => {
   event.waitUntil(
     caches
@@ -19,7 +19,7 @@ self.addEventListener("install", event => {
   );
 });
 
-// 啟用新版本時，刪除 v1 等舊 Cache
+// 新版本生效時，刪除所有舊版本 Cache
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches
@@ -27,39 +27,37 @@ self.addEventListener("activate", event => {
       .then(cacheNames =>
         Promise.all(
           cacheNames
-            .filter(cacheName => cacheName !== CACHE_NAME)
-            .map(cacheName => caches.delete(cacheName))
+            .filter(name => name !== CACHE_NAME)
+            .map(name => caches.delete(name))
         )
       )
       .then(() => self.clients.claim())
   );
 });
 
-// 優先讀取目前版本 Cache；沒有才從網絡下載
+// 有網絡時優先讀最新版；斷網時先用 Cache
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") {
     return;
   }
 
   event.respondWith(
-    caches.open(CACHE_NAME).then(async cache => {
-      const cachedResponse = await cache.match(event.request);
+    fetch(event.request)
+      .then(response => {
+        if (
+          response &&
+          response.status === 200 &&
+          response.type === "basic"
+        ) {
+          const responseCopy = response.clone();
 
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseCopy);
+          });
+        }
 
-      const networkResponse = await fetch(event.request);
-
-      if (
-        networkResponse &&
-        networkResponse.status === 200 &&
-        networkResponse.type === "basic"
-      ) {
-        cache.put(event.request, networkResponse.clone());
-      }
-
-      return networkResponse;
-    })
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

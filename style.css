@@ -1,55 +1,128 @@
 :root {
-  color-scheme: dark;
-  --bg: #050505;
-  --card: #111111;
-  --text: #ffffff;
-  --muted: #b8b8b8;
-  --accent: #f2d600;
-  --line: #3a3a3a;
-  --button: #202020;
-  --danger: #ff6b6b;
+  color-scheme: light;
+
+  --mtr-navy: #002e5d;
+  --mtr-blue: #0b4f82;
+  --mtr-red: #e60012;
+  --mtr-magenta: #a50063;
+  --mtr-yellow: #f2d13d;
+  --mtr-green: #00a66a;
+
+  --bg: #cfd6dc;
+  --panel: #f4f7f9;
+  --panel-strong: #ffffff;
+  --text: #082f57;
+  --muted: #52697c;
+  --line: #9caab5;
+  --button: #ffffff;
+  --danger: #d82020;
 }
 
 .light {
   color-scheme: light;
-  --bg: #f5f7fb;
-  --card: #ffffff;
-  --text: #102033;
-  --muted: #5f6f83;
-  --accent: #006dd9;
-  --line: #d9e2ee;
-  --button: #eef3f9;
-  --danger: #c62828;
+
+  --bg: #e8edf1;
+  --panel: #ffffff;
+  --panel-strong: #ffffff;
+  --text: #082f57;
+  --muted: #52697c;
+  --line: #a7b4be;
+  --button: #ffffff;
+  --danger: #d82020;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Arial, "Noto Sans JP", "Noto Sans HK", sans-serif;
-  background: #050505;
+  font-family:
+    Arial,
+    "Helvetica Neue",
+    "Noto Sans JP",
+    "Noto Sans HK",
+    "Noto Sans TC",
+    sans-serif;
+  background:
+    linear-gradient(
+      180deg,
+      #bcc5cc 0,
+      #e4e8eb 180px,
+      #d0d7dc 100%
+    );
   color: var(--text);
 }
 
-.light body {
-  background: radial-gradient(circle at top, #dcecff 0%, var(--bg) 42%);
+.app {
+  width: min(920px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 16px 36px;
 }
 
-.app {
-  width: min(760px, 100%);
-  margin: 0 auto;
-  padding: 22px 16px calc(28px + env(safe-area-inset-bottom));
+/* =========================
+   Top MTR line strip
+   ========================= */
+
+.mtr-top-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+
+  margin: 0 -16px;
+  padding: 14px 24px 12px;
+
+  color: #ffffff;
+  background:
+    linear-gradient(
+      90deg,
+      var(--mtr-magenta) 0%,
+      var(--mtr-magenta) 58%,
+      var(--mtr-red) 58%,
+      var(--mtr-red) 100%
+    );
+
+  border-bottom: 7px solid var(--mtr-navy);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
+
+.mtr-line-name {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.mtr-line-name-en {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
+/* =========================
+   Header
+   ========================= */
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin: 14px 0 20px;
+  gap: 18px;
+
+  margin: 0 -16px 16px;
+  padding: 22px 24px;
+
+  background: #ffffff;
+  border-bottom: 1px solid #a8b3bc;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.11);
 }
 
 .header-actions {
@@ -57,63 +130,69 @@ header {
   align-items: center;
   gap: 10px;
   flex: 1;
-  max-width: 540px;
+  max-width: 500px;
 }
 
 .eyebrow {
-  margin: 0 0 4px;
-  color: var(--accent);
-  font-weight: 800;
-  letter-spacing: .04em;
+  margin: 0 0 5px;
+  color: var(--mtr-magenta);
+  font-weight: 900;
+  letter-spacing: 0.08em;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(34px, 8vw, 56px);
+  color: var(--mtr-navy);
+  font-size: clamp(34px, 6vw, 58px);
   line-height: 1;
+  font-weight: 900;
 }
 
 h2 {
   margin: 0;
+  color: var(--mtr-navy);
   font-size: 22px;
 }
 
-.card {
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 18px;
-  margin: 14px 0;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
-}
-
-.controls {
-  display: grid;
-  gap: 14px;
-}
-
-label {
-  display: grid;
-  gap: 8px;
-  color: var(--muted);
-  font-weight: 800;
-}
+/* =========================
+   Buttons and selectors
+   ========================= */
 
 select,
 button {
   width: 100%;
-  min-height: 52px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  min-height: 50px;
+
+  border: 1px solid #8b9aa5;
+  border-radius: 5px;
+
   background: var(--button);
-  color: var(--text);
-  font-size: 18px;
+  color: var(--mtr-navy);
+
+  font-size: 17px;
   font-weight: 800;
   padding: 0 14px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+select {
+  cursor: pointer;
 }
 
 button {
   cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+button:hover {
+  background: #eef4f8;
+  border-color: var(--mtr-blue);
 }
 
 button:active {
@@ -127,13 +206,263 @@ button:active {
 
 .icon-btn,
 #themeBtn {
-  width: 56px;
-  height: 56px;
-  min-height: 56px;
+  width: 54px;
+  height: 54px;
+  min-height: 54px;
+  flex: 0 0 54px;
+
   border-radius: 50%;
-  font-size: 22px;
   padding: 0;
-  flex: 0 0 56px;
+  font-size: 21px;
+
+  background: var(--mtr-navy);
+  color: #ffffff;
+  border-color: var(--mtr-navy);
+}
+
+/* =========================
+   Main MTR station display
+   ========================= */
+
+.mtr-station-screen {
+  position: relative;
+  overflow: hidden;
+
+  margin: 18px 0;
+  padding: 44px 28px 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fbfd 0%,
+      #e7f0f7 62%,
+      #d8e7f2 100%
+    );
+
+  border: 4px solid #293a48;
+  border-radius: 3px;
+
+  box-shadow:
+    inset 0 0 0 2px #ffffff,
+    0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.mtr-station-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 28%
+    );
+}
+
+.exit-pill {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 18px;
+
+  min-width: 155px;
+  padding: 5px 18px 6px;
+
+  color: #ffffff;
+  background: var(--mtr-green);
+
+  border-radius: 20px;
+  text-align: center;
+  line-height: 1.05;
+  font-weight: 900;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.exit-pill span {
+  display: block;
+  font-size: 14px;
+}
+
+.exit-pill small {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.station-display {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.station-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+}
+
+.station-name strong {
+  color: var(--mtr-navy);
+  font-size: clamp(40px, 8vw, 76px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.station-name em {
+  color: var(--mtr-navy);
+  font-size: clamp(27px, 5vw, 49px);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.station-dot {
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+
+  border: 3px solid var(--mtr-navy);
+  border-radius: 50%;
+
+  background: var(--mtr-yellow);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+.direction-display {
+  margin-top: 18px;
+  padding: 10px 12px;
+
+  color: var(--mtr-navy);
+  background: rgba(242, 209, 61, 0.72);
+
+  border-top: 1px solid rgba(8, 47, 87, 0.16);
+  border-bottom: 1px solid rgba(8, 47, 87, 0.16);
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.direction-display small {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================
+   Route diagram
+   ========================= */
+
+.route-line {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 72px;
+  margin-top: 22px;
+  padding: 0 20px;
+}
+
+.route-line::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 31px;
+
+  height: 11px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--mtr-magenta) 0%,
+      var(--mtr-magenta) 49%,
+      var(--mtr-red) 49%,
+      var(--mtr-red) 100%
+    );
+
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+}
+
+.route-stop {
+  position: relative;
+  z-index: 2;
+
+  width: 27px;
+  height: 27px;
+
+  border: 5px solid var(--mtr-navy);
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.route-stop.passed {
+  background: var(--mtr-magenta);
+}
+
+.route-stop.current {
+  width: 40px;
+  height: 40px;
+
+  background: var(--mtr-yellow);
+  border-color: var(--mtr-red);
+
+  box-shadow:
+    0 0 0 4px #ffffff,
+    0 0 0 6px var(--mtr-navy);
+}
+
+/* =========================
+   Cards
+   ========================= */
+
+.card {
+  margin: 14px 0;
+  padding: 18px;
+
+  color: var(--text);
+  background: rgba(250, 252, 253, 0.97);
+
+  border: 1px solid #97a5af;
+  border-radius: 4px;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.commute-card {
+  border-top: 8px solid var(--mtr-magenta);
+}
+
+.controls {
+  display: grid;
+  gap: 14px;
+  border-top: 8px solid var(--mtr-blue);
+}
+
+.favorite-card {
+  border-top: 8px solid var(--mtr-red);
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--mtr-navy);
+  font-weight: 900;
 }
 
 .quick-grid {
@@ -149,61 +478,121 @@ button:active {
   line-height: 1.45;
 }
 
-.next {
-  text-align: center;
-  padding: 26px 18px;
-}
-
-.label {
-  margin: 0;
-  color: var(--muted);
-  font-weight: 900;
-  font-size: 18px;
-}
-
-.next-time {
-  font-size: clamp(76px, 22vw, 140px);
-  font-weight: 950;
-  letter-spacing: -0.06em;
-  line-height: 1;
-  margin: 8px 0;
-}
-
-.countdown {
-  margin: 0;
-  font-size: clamp(26px, 7vw, 42px);
-  font-weight: 950;
-  color: var(--accent);
-}
-
-.status-line {
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-weight: 800;
-}
-
 .row-title {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 12px;
 }
 
 #nowBtn,
 #addFavoriteBtn {
   width: auto;
-  min-height: 44px;
-  font-size: 15px;
+  min-height: 42px;
   padding: 0 12px;
+
   white-space: nowrap;
+  font-size: 14px;
 }
 
+/* =========================
+   Main next train screen
+   ========================= */
+
+.next {
+  position: relative;
+  overflow: hidden;
+
+  padding: 30px 20px;
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #edf4f8 100%
+    );
+
+  border: 4px solid #293a48;
+  border-radius: 3px;
+}
+
+.next::before {
+  content: "";
+  display: block;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 10px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--mtr-magenta) 0%,
+      var(--mtr-magenta) 55%,
+      var(--mtr-red) 55%,
+      var(--mtr-red) 100%
+    );
+}
+
+.label {
+  margin: 8px 0 0;
+  color: var(--mtr-navy);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.next-time {
+  margin: 10px 0 6px;
+
+  color: var(--mtr-navy);
+
+  font-size: clamp(82px, 18vw, 154px);
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.countdown {
+  margin: 0;
+
+  color: var(--mtr-red);
+
+  font-size: clamp(28px, 6vw, 45px);
+  font-weight: 950;
+}
+
+.status-line {
+  display: inline-block;
+  margin: 18px 0 0;
+  padding: 7px 14px;
+
+  color: #ffffff;
+  background: var(--mtr-navy);
+
+  border-radius: 2px;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* =========================
+   Train list
+   ========================= */
+
 .train-list {
+  display: grid;
+  gap: 0;
+
   list-style: none;
   padding: 0;
-  margin: 14px 0 0;
-  display: grid;
-  gap: 10px;
+  margin: 15px 0 0;
+
+  border: 2px solid var(--mtr-navy);
+  background: #ffffff;
 }
 
 .train-list li {
@@ -211,29 +600,44 @@ button:active {
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  padding: 16px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .055);
-  border: 1px solid var(--line);
+
+  padding: 14px 18px;
+
+  background: #ffffff;
+  border-bottom: 1px solid #aeb9c1;
+}
+
+.train-list li:nth-child(even) {
+  background: #edf4f8;
+}
+
+.train-list li:last-child {
+  border-bottom: 0;
 }
 
 .time {
-  font-size: 34px;
+  color: var(--mtr-navy);
+  font-size: 33px;
   font-weight: 950;
 }
 
 .time small {
-  font-size: 13px;
-  color: var(--muted);
+  margin-left: 5px;
+  color: var(--mtr-magenta);
+  font-size: 12px;
   letter-spacing: 0;
 }
 
 .min {
-  color: var(--muted);
+  color: var(--mtr-red);
   font-size: 18px;
   font-weight: 900;
   text-align: right;
 }
+
+/* =========================
+   Favorites
+   ========================= */
 
 .favorite-list {
   display: grid;
@@ -252,26 +656,41 @@ button:active {
 }
 
 .delete-btn {
-  color: var(--danger);
-  font-size: 28px;
   padding: 0;
+  color: var(--danger);
+  font-size: 27px;
 }
 
 .empty {
-  color: var(--muted);
   margin: 0;
+  color: var(--muted);
   line-height: 1.5;
 }
 
+/* =========================
+   Footer
+   ========================= */
+
 footer {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+  margin-top: 20px;
+  padding: 14px 16px;
+
+  color: #435c70;
+  background: rgba(255, 255, 255, 0.66);
+
+  border-top: 4px solid var(--mtr-navy);
+
+  font-size: 12px;
+  line-height: 1.55;
 }
+
+/* =========================
+   Desktop layout
+   ========================= */
 
 @media (min-width: 700px) {
   .controls {
-    grid-template-columns: 1fr 1.4fr 1fr;
+    grid-template-columns: 1fr 1.45fr 1fr;
   }
 
   .quick-grid {
@@ -279,17 +698,110 @@ footer {
   }
 }
 
+/* =========================
+   Portrait monitor support
+   ========================= */
+
+@media (min-height: 900px) and (max-width: 850px) {
+  .app {
+    width: min(760px, 100%);
+  }
+
+  .mtr-station-screen {
+    padding-top: 52px;
+  }
+
+  .station-name {
+    flex-wrap: wrap;
+  }
+
+  .next-time {
+    font-size: clamp(96px, 20vw, 150px);
+  }
+}
+
+/* =========================
+   Mobile
+   ========================= */
+
 @media (max-width: 640px) {
   header {
     display: grid;
   }
 
   .header-actions {
+    width: 100%;
     max-width: none;
+  }
+
+  .mtr-top-strip {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .mtr-line-name-en {
+    text-align: left;
+  }
+
+  .station-name {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .station-dot {
+    width: 29px;
+    height: 29px;
+    flex-basis: 29px;
+  }
+
+  .route-line {
+    padding: 0;
   }
 }
 
 @media (max-width: 520px) {
+  .app {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .mtr-top-strip,
+  header {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .mtr-station-screen {
+    padding: 50px 14px 20px;
+  }
+
+  .exit-pill {
+    left: 12px;
+  }
+
+  .station-name strong {
+    font-size: 42px;
+  }
+
+  .station-name em {
+    font-size: 28px;
+  }
+
+  .direction-display {
+    font-size: 17px;
+  }
+
+  .route-stop {
+    width: 23px;
+    height: 23px;
+  }
+
+  .route-stop.current {
+    width: 34px;
+    height: 34px;
+  }
+
   .row-title {
     display: grid;
   }
